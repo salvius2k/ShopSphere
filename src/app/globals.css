@@ -1,0 +1,200 @@
+
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* =================================
+   SHOPSPHERE CINEMATIC TRANSITION
+================================= */
+
+.site-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #080808;
+  overflow: hidden;
+}
+
+.transition-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.transition-logo {
+  width: 76px;
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #d6ad60;
+  border-radius: 20px;
+  color: #e7c477;
+  font-size: 42px;
+  font-weight: 800;
+  box-shadow: 0 0 35px rgba(214, 173, 96, 0.2);
+  animation: logoReveal 1s ease both;
+}
+
+.transition-title {
+  margin-top: 25px;
+  color: #ffffff;
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: 7px;
+  animation: titleReveal 1s ease 0.3s both;
+}
+
+.transition-subtitle {
+  margin-top: 10px;
+  color: #b6a078;
+  font-size: 10px;
+  letter-spacing: 5px;
+  animation: titleReveal 1s ease 0.6s both;
+}
+
+.transition-line {
+  width: 150px;
+  height: 2px;
+  margin-top: 35px;
+  background: #292929;
+  overflow: hidden;
+  animation: titleReveal 0.8s ease 0.8s both;
+}
+
+.transition-line span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #d6ad60;
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: loadingLine 1.2s ease 0.9s forwards;
+}
+
+/* Opening animation */
+
+.site-transition-intro {
+  animation: introFadeOut 0.7s ease 1.7s forwards;
+}
+
+/* External website exit animation */
+
+.site-transition-exit {
+  animation: exitFadeIn 0.45s ease forwards;
+}
+
+.site-transition-exit .transition-content {
+  animation: exitContent 0.7s ease forwards;
+}
+
+@keyframes logoReveal {
+  from {
+    opacity: 0;
+    transform: translateY(25px) scale(0.7);
+    filter: blur(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes titleReveal {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes loadingLine {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes introFadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
+@keyframes exitFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes exitContent {
+  to {
+    transform: scale(1.08);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .transition-logo {
+    width: 65px;
+    height: 65px;
+    font-size: 35px;
+  }
+
+  .transition-title {
+    font-size: 23px;
+    letter-spacing: 5px;
+  }
+
+  .transition-subtitle {
+    font-size: 8px;
+    letter-spacing: 3px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-transition,
+  .site-transition *,
+  .transition-content {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+  }
+}
